@@ -20,7 +20,7 @@ export default class App extends Component {
       {
         id: 1,
         name: "Ivan",
-        lastname: "VVV",
+        lastname: "VBN",
         email: "ivan@gmail.com",
         age: 18,
         favourite: true,
@@ -32,7 +32,7 @@ export default class App extends Component {
       {
         id: 2,
         name: "Ivanka",
-        lastname: "VVV",
+        lastname: "VBH",
         email: "ivan@gmail.com",
         age: 20,
         favourite: false,
@@ -43,7 +43,7 @@ export default class App extends Component {
       {
         id: 3,
         name: "Ivanko",
-        lastname: "VVV",
+        lastname: "KLL",
         email: "ivan@gmail.com",
         age: 23,
         favourite: false,
@@ -110,11 +110,11 @@ export default class App extends Component {
 
     return this.getUsers(
       users.filter((x) => {
-        const query = this.state.search.toLowerCase();
+        //const query2 = this.state.search.toLowerCase();
 
         return (
-          x.name.toLowerCase().includes(this.state.query.toLowerCase()).indexOf(query) >= 0 ||
-          x.lastname.toLowerCase().includes(this.state.query.toLowerCase()).indexOf(query) >= 0
+          x.name.toLowerCase().includes(this.state.query.toLowerCase()) ||
+          x.lastname.toLowerCase().includes(this.state.query.toLowerCase())
           );
       })
     );
@@ -135,6 +135,9 @@ export default class App extends Component {
           key={el.id}
           id={el.id}
           name={el.name}
+          lastname={el.lastname}
+          telephone={el.telephone}
+          email={el.email}
           age={el.age}
           favourite={el.favourite}
           social={el.social}

@@ -9,7 +9,7 @@ export default class Controls extends Component {
       this.props.favourite == true ? "fas fa-star" : "far fa-star";
     return (
       <>
-      <div class="row justify-content-around align-items-center">
+      <div class="row justify-content-around align-items-center mb-3">
         <span className="d-block">
           <i onClick={this.props.onDelete} className="fas fa-trash delete-img"></i>
         </span>
