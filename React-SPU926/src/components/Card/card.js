@@ -10,10 +10,10 @@ export default class Card extends Component {
   render() {
     const { id } = this.props;
     return (
-      <div className="card col-4">
-        <Header name={this.props.name} />
-        <h2>Age: {this.props.age}</h2>
+      <div className="card ">
         <Info name={this.props.name} />
+       <h2> <Header name={this.props.name} /></h2>
+        <h4> <strong> Age: </strong> {this.props.age}</h4>
         <Controls
           id={id}
           onDelete={this.props.onDelete}

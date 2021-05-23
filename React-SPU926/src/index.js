@@ -20,6 +20,8 @@ export default class App extends Component {
       {
         id: 1,
         name: "Ivan",
+        lastname: "VVV",
+        email: "ivan@gmail.com",
         age: 18,
         favourite: true,
         social: {
@@ -30,6 +32,8 @@ export default class App extends Component {
       {
         id: 2,
         name: "Ivanka",
+        lastname: "VVV",
+        email: "ivan@gmail.com",
         age: 20,
         favourite: false,
         social: {
@@ -39,6 +43,8 @@ export default class App extends Component {
       {
         id: 3,
         name: "Ivanko",
+        lastname: "VVV",
+        email: "ivan@gmail.com",
         age: 23,
         favourite: false,
         social: {
@@ -104,7 +110,12 @@ export default class App extends Component {
 
     return this.getUsers(
       users.filter((x) => {
-        return x.name.toLowerCase().includes(this.state.query.toLowerCase());
+        const query = this.state.search.toLowerCase();
+
+        return (
+          x.name.toLowerCase().includes(this.state.query.toLowerCase()).indexOf(query) >= 0 ||
+          x.lastname.toLowerCase().includes(this.state.query.toLowerCase()).indexOf(query) >= 0
+          );
       })
     );
   };
@@ -166,9 +177,9 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <div className="container">
+                    <div className="container mt-4 justify-content-between">
                       {/* <Search onSearch={this.onQueryChanged} /> */}
-                      <div className="row">{this.onFilter()}</div>
+                      <div className="row justify-content-between">{this.onFilter()}</div>
                     </div>
                   </>
                 );
