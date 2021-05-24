@@ -9,19 +9,22 @@ import Menu from "./components/Menu/menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Info from "./components/Info/";
 import { Navbar, Nav, Form } from 'react-bootstrap';
+import EditItem from "./components/EditItem";
 
 let Id = 10000;
 
 export default class App extends Component {
   state = {
     selected: false,
+    show: false,
     query: "",
     data: [
       {
         id: 1,
         name: "Ivan",
         lastname: "VBN",
-        email: "ivan@gmail.com",
+        email: "ivan1@gmail.com",
+        telephone: "+2143543253",
         age: 18,
         favourite: true,
         social: {
@@ -33,7 +36,8 @@ export default class App extends Component {
         id: 2,
         name: "Ivanka",
         lastname: "VBH",
-        email: "ivan@gmail.com",
+        email: "ivan2@gmail.com",
+        telephone: "+35345354",
         age: 20,
         favourite: false,
         social: {
@@ -44,7 +48,8 @@ export default class App extends Component {
         id: 3,
         name: "Ivanko",
         lastname: "KLL",
-        email: "ivan@gmail.com",
+        email: "ivan3@gmail.com",
+        telephone: "+8756586788",
         age: 23,
         favourite: false,
         social: {
@@ -64,15 +69,54 @@ export default class App extends Component {
     });
   };
 
-  onAdd = (item) => {
+  onEditPost = (item) => {
+    let index = this.findElementByIndex(item.id);
+
     let newEl = {
       id: Id++,
       name: item.name,
       age: item.age,
       favourite: true,
+      social: null
+      // {
+      //   fb: "https://fb.com/#",
+      //   insta: "https://instagram.com",
+      // }
+    }
+
+
+    this.setState(({ data }) => {
+      return {
+        data: [...data.slice(0, index), newEl, ...data.slice(index + 1)],
+      };
+    });
+  };
+
+  onEdit = (id) =>
+  {
+    let index = this.findElementByIndex(id);
+    
+    return(
+      <>
+      <EditItem onEditPost={this.onEditPost} fillFields={index} ></EditItem>
+      </>
+    );
+  }
+
+  onAdd = (item) => {
+    let newEl = {
+      id: Id++,
+      name: item.name,
+      age: item.age,
+      // favourite: true,
+      lastname: item.lastname,
+      telephone: item.telephone,
+      email: item.email,
+      favourite: item.favourite,
+      // social={item.social},
       social: {
-        fb: "https://fb.com/#",
-        insta: "https://instagram.com",
+        fb: item.fb,//"https://fb.com/",
+        insta: item.insta//"https://instagram.com",
       },
     };
 
@@ -114,7 +158,8 @@ export default class App extends Component {
 
         return (
           x.name.toLowerCase().includes(this.state.query.toLowerCase()) ||
-          x.lastname.toLowerCase().includes(this.state.query.toLowerCase())
+          x.lastname.toLowerCase().includes(this.state.query.toLowerCase()) ||
+          x.telephone.toLowerCase().includes(this.state.query.toLowerCase()) 
           );
       })
     );
@@ -132,6 +177,7 @@ export default class App extends Component {
         <Card
           onDelete={() => this.onDelete(el.id)}
           onFavouriteChange={() => this.onFavouriteChange(el.id)}
+          onEdit={()=>this.onEdit(el.id)}
           key={el.id}
           id={el.id}
           name={el.name}
@@ -189,7 +235,11 @@ export default class App extends Component {
               }}
             />
 
-            <Route path="/add/" exact component={AddItem} />
+            {/* <Route path="/add/" exact component={AddItem} /> */}
+            <Route
+            exact
+            path="/add/" 
+            render={()=><AddItem onAdd={this.onAdd}></AddItem>} />
             <Route
               exact
               path="/about/"

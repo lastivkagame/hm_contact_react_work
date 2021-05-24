@@ -14,7 +14,7 @@ export default class Controls extends Component {
           <i onClick={this.props.onDelete} className="fas fa-trash delete-img"></i>
         </span>
         <span className="d-block">
-          <Button className="btn-success">EDIT</Button>
+          <Button className="btn-success" onClick={this.props.onEdit}>EDIT</Button>
         </span>
         <span className="d-block">
           <i onClick={this.props.onFavouriteChange} className={className}></i>

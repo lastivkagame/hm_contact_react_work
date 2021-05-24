@@ -19,6 +19,7 @@ export default class Card extends Component {
         <Controls
           id={id}
           onDelete={this.props.onDelete}
+          onEdit={this.props.onEdit}
           onFavouriteChange={this.props.onFavouriteChange}
           favourite={this.props.favourite}
         />
